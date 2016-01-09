@@ -1,0 +1,10 @@
+{
+  "firebase": "flutterpad",
+  "public": "build/web",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**",
+    "packages/"
+  ]
+}

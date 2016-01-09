@@ -1,0 +1,4 @@
+name: flutterpad
+material-design-icons:
+  - name: content/add
+  - name: navigation/more_vert
