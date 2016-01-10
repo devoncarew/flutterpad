@@ -51,6 +51,8 @@ class UIGenerator {
         if (property.required) continue;
         if (property.valueType) continue;
 
+        String id = '${widget.name}/${property.type}/${property.name}';
+
         // if (!property.valueType) {
         //   Widget childWidgetType = _map[property.name];
         //
@@ -61,11 +63,26 @@ class UIGenerator {
         //   }
         // }
 
-        if (property.type == 'Widget' && property.name == 'label') {
+        // /Widget/label
+        if (id.endsWith('/Widget/label')) {
           params.add({
             property.name: generateUI(_map['Text'])
           });
+        } else if (id.endsWith('/String/title')) {
+          params.add({
+            property.name: getForValueType(property.type)
+          });
         }
+
+        // String title
+
+        // FloatingActionButton Widget child
+
+        // Icon String icon ('content/add')
+        // child: new Icon(
+        //   icon: 'content/add'
+        // )
+
       }
     }
 

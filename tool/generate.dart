@@ -250,30 +250,30 @@ class WidgetPage extends SubPage {
       gen.tag('p', text: widget.docs, c: 'lead');
     }
 
-    // // Create a code sample.
-    // if (!widget.isAbstract) {
-    //   Map ui = _gen.uiGen.generateUI(widget, mainElement: true);
-    //   String jsonEncoded = JSON.encode(ui);
-    //   String dartSource = printAsDart(ui);
-    //
-    //   // TODO: syntax highlight this
-    //   gen.startTag('pre', c: 'prettyprint', newLine: false);
-    //   gen.tag(
-    //     'code',
-    //     c: 'language-dart',
-    //     attributes: 'data-lang="dart"',
-    //     text: dartSource.trim(),
-    //     newLine: false
-    //   );
-    //   gen.endTag();
-    //
-    //   // Write out the json encoded UI data.
-    //   gen.tag(
-    //     'div',
-    //     attributes: 'hidden id="${widget.name}-ui"',
-    //     text: _htmlEncode(jsonEncoded)
-    //   );
-    // }
+    // Create a code sample.
+    if (!widget.isAbstract) {
+      Map ui = _gen.uiGen.generateUI(widget, mainElement: true);
+      String jsonEncoded = JSON.encode(ui);
+      String dartSource = printAsDart(ui);
+
+      // TODO: syntax highlight this
+      gen.startTag('pre', c: 'prettyprint', newLine: false);
+      gen.tag(
+        'code',
+        c: 'language-dart',
+        attributes: 'data-lang="dart"',
+        text: dartSource.trim(),
+        newLine: false
+      );
+      gen.endTag();
+
+      // Write out the json encoded UI data.
+      gen.tag(
+        'div',
+        attributes: 'hidden id="${widget.name}-ui"',
+        text: _htmlEncode(jsonEncoded)
+      );
+    }
 
     if (widget.properties.isNotEmpty) {
       // gen.tag('h2', text: 'Properties');

@@ -6,7 +6,7 @@ import 'package:grinder/grinder.dart';
 main(List<String> args) => grind(args);
 
 @Task()
-generate() => runDartScript('tool/generate.dart');
+generate() => Dart.runAsync('tool/generate.dart');
 
 @Task()
 analyze() => new PubApp.global('tuneup').runAsync(['check']);
@@ -17,7 +17,7 @@ build() => Pub.buildAsync(directories: ['web']);
 
 @Task()
 @Depends(build)
-deploy() => run('firebase', arguments: ['deploy']);
+deploy() => runAsync('firebase', arguments: ['deploy']);
 
 @DefaultTask()
 @Depends(build, analyze)
