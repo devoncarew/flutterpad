@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'src/ui_builder.g.dart';
+
 void main() {
   runApp(
     new MaterialApp(

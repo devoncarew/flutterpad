@@ -71,6 +71,8 @@ class UIGenerator {
         } else if (id.endsWith('/String/icon')) {
           // /String/icon
           params.add({ property.name: 'content/add' });
+        } else if (id.endsWith('/bool/value')) {
+          params.add({ property.name: true });
         } else if (id == 'FloatingActionButton/Widget/child') {
           // FloatingActionButton/Widget/child
           // Icon String icon ('content/add')

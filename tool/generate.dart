@@ -100,7 +100,7 @@ class Generator extends HtmlGen {
     tag(
       "a",
       href: "http://docs.flutter.io/flutter/",
-      text: "Documentation"
+      text: "API Documentation"
     );
 
     // pair device button
@@ -453,5 +453,13 @@ a.menu-item {
 
 .modifier {
   color: #999;
+}
+
+.menu.docs-menu {
+  margin-bottom: 0;
+}
+
+.menu.docs-menu+.menu.docs-menu {
+  margin-top: 15px;
 }
 ''';

@@ -162,6 +162,14 @@ a.menu-item {
   color: #999;
 }
 
+.menu.docs-menu {
+  margin-bottom: 0;
+}
+
+.menu.docs-menu+.menu.docs-menu {
+  margin-top: 15px;
+}
+
 	</style>
 </head>
 
@@ -171,7 +179,7 @@ a.menu-item {
 		<span class="masthead-logo"><img src="flutter.svg" height="33px" class="masthead-logo mega-octicon"> FlutterPad</span>
 		<nav class="masthead-nav">
 			<a href="http://flutter.io/getting-started/">Getting Started</a>
-			<a href="http://docs.flutter.io/flutter/">Documentation</a>
+			<a href="http://docs.flutter.io/flutter/">API Documentation</a>
 			<button type="button" id=device-button class="btn btn-sm">
 				<span>Pair Device</span>
 			</button>
@@ -410,8 +418,10 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">A material design checkbox</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Checkbox()</code></pre>
-				<div hidden id="Checkbox-ui">{"Checkbox":[]}</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Checkbox(
+  value: true
+)</code></pre>
+				<div hidden id="Checkbox-ui">{"Checkbox":[{"value":true}]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
@@ -1571,8 +1581,10 @@ a.menu-item {
 						<span>StatelessComponent > Widget</span>
 					</div>
 				</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Switch()</code></pre>
-				<div hidden id="Switch-ui">{"Switch":[]}</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Switch(
+  value: true
+)</code></pre>
+				<div hidden id="Switch-ui">{"Switch":[{"value":true}]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>

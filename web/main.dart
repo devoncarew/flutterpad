@@ -50,6 +50,8 @@ void _showPage(Element e) {
   if (page != null) {
     page.attributes.remove('hidden');
   }
+
+  _sendSelection();
 }
 
 void _handleDeviceClick() {
@@ -61,6 +63,8 @@ void _handleDeviceClick() {
     // <span class="octicon octicon-device-mobile">
     deviceButton.text = 'Paired: ${deviceDescription}';
     deviceButton.disabled = true;
+
+    _sendSelection();
   }).catchError((e) {
     // TODO: show error
 
@@ -91,3 +95,17 @@ Future _tryPairDevice() {
 //     print('hljs not available');
 //   }
 // }
+
+void _sendSelection() {
+  if (selected == null) return;
+  if (firebase == null) return;
+
+  String id = selected.attributes['ref-id'];
+  Element encodedUI = querySelector('#${id}-ui');
+
+  if (encodedUI != null) {
+    String data = encodedUI.text;
+    Firebase firebaseUI = firebase.child('ui');
+    firebaseUI.set(data);
+  }
+}
