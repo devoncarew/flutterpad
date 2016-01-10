@@ -1,8 +1,9 @@
-
-import 'dart:convert' show JSON;
+import 'dart:convert' show JSON, HtmlEscape, HtmlEscapeMode;
 import 'dart:io';
 
 import 'src/html_gen.dart';
+import 'src/model.dart';
+import 'src/ui_gen.dart';
 
 // TODO: guides
 
@@ -25,15 +26,23 @@ void main(List args) {
 class Generator extends HtmlGen {
   final File outFile;
   List<SubPage> pages;
+
   Map<String, Widget> _widgetMap;
+
+  UIGenerator uiGen;
 
   Generator(this.outFile) {
     _widgetMap = {};
 
-    pages = Widget.parseWidgets('tool/widgets.json').map((widget) {
+    List<Widget> widgets = Widget.parseWidgets('tool/widgets.json');
+
+    for (Widget widget in widgets) {
       _widgetMap[widget.name] = widget;
-      return new WidgetPage(widget);
-    }).toList();
+    }
+
+    pages = new List.from(widgets.map((Widget widget) => new WidgetPage(widget)));
+
+    uiGen = new UIGenerator(widgets);
   }
 
   void generate() {
@@ -203,14 +212,16 @@ class WidgetPage extends SubPage {
     this.widget = widget,
     super(toTitleCase(widget.package), widget.name);
 
-  void generate(Generator gen) {
+  void generate(HtmlGen gen) {
+    Generator _gen = gen;
+
     gen.startTag('div', c: 'markdown-body', attributes: 'hidden id="${id}"');
     String title = widget.isAbstract
-      ? '${widget.name} <span class=subtle>abstract</span>' : widget.name;
+      ? '${widget.name} <span class=modifier>abstract</span>' : widget.name;
     gen.tag("h1", text: title, c: "page-title");
 
-    List<Widget> ancestors = gen.getAncestors(widget);
-    List<Widget> children = gen.getChildren(widget);
+    List<Widget> ancestors = _gen.getAncestors(widget);
+    List<Widget> children = _gen.getChildren(widget);
 
     if (ancestors.isNotEmpty || children.isNotEmpty) {
       gen.startTag('p');
@@ -239,26 +250,30 @@ class WidgetPage extends SubPage {
       gen.tag('p', text: widget.docs, c: 'lead');
     }
 
-    // TODO: show code if there's a sample
-    if (true) {
-      final String source = '''new Material(
-  child: new Chip(
-    label: new Text('Lorem Ipsum')
-  )
-)
-''';
-
-      // TODO: syntax highlight this
-      gen.startTag('pre', c: 'prettyprint', newLine: false);
-      gen.tag(
-        'code',
-        c: 'language-dart',
-        attributes: 'data-lang="dart"',
-        text: source.trim(),
-        newLine: false
-      );
-      gen.endTag();
-    }
+    // // Create a code sample.
+    // if (!widget.isAbstract) {
+    //   Map ui = _gen.uiGen.generateUI(widget, mainElement: true);
+    //   String jsonEncoded = JSON.encode(ui);
+    //   String dartSource = printAsDart(ui);
+    //
+    //   // TODO: syntax highlight this
+    //   gen.startTag('pre', c: 'prettyprint', newLine: false);
+    //   gen.tag(
+    //     'code',
+    //     c: 'language-dart',
+    //     attributes: 'data-lang="dart"',
+    //     text: dartSource.trim(),
+    //     newLine: false
+    //   );
+    //   gen.endTag();
+    //
+    //   // Write out the json encoded UI data.
+    //   gen.tag(
+    //     'div',
+    //     attributes: 'hidden id="${widget.name}-ui"',
+    //     text: _htmlEncode(jsonEncoded)
+    //   );
+    // }
 
     if (widget.properties.isNotEmpty) {
       // gen.tag('h2', text: 'Properties');
@@ -268,6 +283,9 @@ class WidgetPage extends SubPage {
         gen.span(text: p.name, c: 'strong');
         // TODO: Hyperlink type.
         gen.span(text: p.type, c: 'subtle');
+        if (p.required) {
+          gen.span(text: '(required)', c: 'modifier');
+        }
         if (p.docs != null) {
           // TODO: emit as markdown
           gen.tag('span', text: '— ${p.docs}');
@@ -280,52 +298,12 @@ class WidgetPage extends SubPage {
   }
 }
 
-class Widget implements Comparable<Widget> {
-  static List<Widget> parseWidgets(String path) {
-    Map data = JSON.decode(new File(path).readAsStringSync());
-    List<Widget> widgets = [];
-    data.forEach((String key, Map value) {
-      widgets.add(new Widget._(value));
-    });
-    return widgets;
-  }
-
-  String name;
-  String docs;
-  String package;
-  String parent;
-  bool isAbstract;
-  List<Property> properties = [];
-
-  Widget._(Map data) {
-    name = data['name'];
-    docs = data['docs'];
-    package = data['package'];
-    parent = data['parent'];
-    isAbstract = data['abstract'] == true;
-
-    if (data.containsKey('properties')) {
-      properties = data['properties'].map((m) => new Property._(m)).toList();
-    }
-  }
-
-  int compareTo(Widget other) => name.compareTo(other.name);
-}
-
-class Property {
-  String name;
-  String type;
-  String docs;
-
-  Property._(Map m) {
-    name = m['name'];
-    type = m['type'];
-    docs = m['docs'];
-  }
-}
-
 String toTitleCase(String str) {
   return str.substring(0, 1).toUpperCase() + str.substring(1);
+}
+
+String _htmlEncode(String str) {
+  return new HtmlEscape(HtmlEscapeMode.ELEMENT).convert(str);
 }
 
 const String _inlineCss = '''
@@ -471,5 +449,9 @@ a.menu-item {
 .property {
   text-indent: -1em;
   margin-left: 1em;
+}
+
+.modifier {
+  color: #999;
 }
 ''';

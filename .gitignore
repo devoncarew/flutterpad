@@ -6,4 +6,3 @@
 build/
 packages
 pubspec.lock
-tool/widgets.json
