@@ -49,7 +49,6 @@ class UIGenerator {
     if (mainElement) {
       for (Property property in widget.properties) {
         if (property.required) continue;
-        if (property.valueType) continue;
 
         String id = '${widget.name}/${property.type}/${property.name}';
 
@@ -63,26 +62,23 @@ class UIGenerator {
         //   }
         // }
 
-        // /Widget/label
         if (id.endsWith('/Widget/label')) {
-          params.add({
-            property.name: generateUI(_map['Text'])
-          });
+          // /Widget/label
+          params.add({ property.name: generateUI(_map['Text']) });
         } else if (id.endsWith('/String/title')) {
-          params.add({
-            property.name: getForValueType(property.type)
-          });
+          // /String/title
+          params.add({ property.name: getForValueType(property.type) });
+        } else if (id.endsWith('/String/icon')) {
+          // /String/icon
+          params.add({ property.name: 'content/add' });
+        } else if (id == 'FloatingActionButton/Widget/child') {
+          // FloatingActionButton/Widget/child
+          // Icon String icon ('content/add')
+          // child: new Icon(
+          //   icon: 'content/add'
+          // )
+          params.add({ property.name: generateUI(_map['Icon'], mainElement: true) });
         }
-
-        // String title
-
-        // FloatingActionButton Widget child
-
-        // Icon String icon ('content/add')
-        // child: new Icon(
-        //   icon: 'content/add'
-        // )
-
       }
     }
 
@@ -146,10 +142,17 @@ class _DartPrinter {
           String paramName = m.keys.first;
           Map data = m[paramName];
 
-          // TODO:
           write('${paramName}: ');
-          _traverse(data);
-          if (suffix.isNotEmpty) writeln('${suffix}');
+          if (data is Map) {
+            _traverse(data);
+            if (suffix.isNotEmpty) writeln('${suffix}');
+          } else {
+            if (data is String) {
+              writeln("'${data}'${suffix}");
+            } else {
+              writeln('${data}${suffix}');
+            }
+          }
         }
       }
       writeln(')');
