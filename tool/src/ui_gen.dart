@@ -65,9 +65,6 @@ class UIGenerator {
         if (id.endsWith('/Widget/label')) {
           // /Widget/label
           params.add({ property.name: generateUI(_map['Text']) });
-        } else if (id.endsWith('/Widget/child')) {
-          // /Widget/child
-          params.add({ property.name: generateUI(_map['Text']) });
         } else if (id.endsWith('/String/title')) {
           // /String/title
           params.add({ property.name: getForValueType(property.type) });
@@ -81,6 +78,9 @@ class UIGenerator {
           //   icon: 'content/add'
           // )
           params.add({ property.name: generateUI(_map['Icon'], mainElement: true) });
+        } else if (id.endsWith('/Widget/child')) {
+          // /Widget/child
+          params.add({ property.name: generateUI(_map['Text']) });
         }
       }
     }
