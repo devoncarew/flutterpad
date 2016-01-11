@@ -195,6 +195,8 @@ a.menu-item {
 				<a ref-id="AlignTransition" class="menu-item">AlignTransition</a>
 				<a ref-id="AnimatedContainer" class="menu-item">AnimatedContainer</a>
 				<a ref-id="AnimatedModalBarrier" class="menu-item">AnimatedModalBarrier</a>
+				<a ref-id="AnimatedPositioned" class="menu-item">AnimatedPositioned</a>
+				<a ref-id="AnimatedWidgetBase" class="menu-item">AnimatedWidgetBase</a>
 				<a ref-id="AspectRatio" class="menu-item">AspectRatio</a>
 				<a ref-id="AssetImage" class="menu-item">AssetImage</a>
 				<a ref-id="AsyncImage" class="menu-item">AsyncImage</a>
@@ -262,6 +264,7 @@ a.menu-item {
 				<a ref-id="PageStorage" class="menu-item">PageStorage</a>
 				<a ref-id="PageViewport" class="menu-item">PageViewport</a>
 				<a ref-id="PageableList" class="menu-item">PageableList</a>
+				<a ref-id="PerformanceOverlay" class="menu-item">PerformanceOverlay</a>
 				<a ref-id="Placeholder" class="menu-item">Placeholder</a>
 				<a ref-id="PositionedTransition" class="menu-item">PositionedTransition</a>
 				<a ref-id="RawImage" class="menu-item">RawImage</a>
@@ -290,7 +293,6 @@ a.menu-item {
 				<a ref-id="StatefulBuilder" class="menu-item">StatefulBuilder</a>
 				<a ref-id="StatefulComponent" class="menu-item">StatefulComponent</a>
 				<a ref-id="StatelessComponent" class="menu-item">StatelessComponent</a>
-				<a ref-id="StatisticsOverlay" class="menu-item">StatisticsOverlay</a>
 				<a ref-id="StatusTransitionComponent" class="menu-item">StatusTransitionComponent</a>
 				<a ref-id="StyledText" class="menu-item">StyledText</a>
 				<a ref-id="Text" class="menu-item">Text</a>
@@ -1225,6 +1227,10 @@ a.menu-item {
 					<span class="strong">debugShowMaterialGrid</span>
 					<span class="subtle">bool</span>
 				</div>
+				<div class="property">
+					<span class="strong">showPerformanceOverlay</span>
+					<span class="subtle">bool</span>
+				</div>
 			</div>
 			<div hidden id="MaterialButton" class="markdown-body">
 				<h1 class="page-title">MaterialButton <span class=modifier>abstract</span></h1>
@@ -1674,12 +1680,8 @@ a.menu-item {
 					<span class="subtle">Key</span>
 				</div>
 				<div class="property">
-					<span class="strong">items</span>
+					<span class="strong">children</span>
 					<span class="subtle">List</span>
-				</div>
-				<div class="property">
-					<span class="strong">itemBuilder</span>
-					<span class="subtle">TabItemBuilder</span>
 				</div>
 			</div>
 			<div hidden id="TimePicker" class="markdown-body">
@@ -1862,7 +1864,7 @@ a.menu-item {
 				<p>
 					<div>
 						<span class="subtle">Ancestors</span>
-						<span>StatefulComponent > Widget</span>
+						<span>AnimatedWidgetBase > StatefulComponent > Widget</span>
 					</div>
 				</p>
 				<p class="lead">A container that gradually changes its values over a period of time.</p>
@@ -1921,12 +1923,10 @@ a.menu-item {
 				<div class="property">
 					<span class="strong">curve</span>
 					<span class="subtle">Curve</span>
-					<span>— The curve to apply when animating the parameters of this container.</span>
 				</div>
 				<div class="property">
 					<span class="strong">duration</span>
 					<span class="subtle">Duration</span>
-					<span>— The duration over which to animate the parameters of this container.</span>
 				</div>
 			</div>
 			<div hidden id="AnimatedModalBarrier" class="markdown-body">
@@ -1958,6 +1958,94 @@ a.menu-item {
 					<span class="strong">dismissable</span>
 					<span class="subtle">bool</span>
 					<span>— Whether touching the barrier will pop the current route off the [Navigator].</span>
+				</div>
+			</div>
+			<div hidden id="AnimatedPositioned" class="markdown-body">
+				<h1 class="page-title">AnimatedPositioned</h1>
+				<p>
+					<div>
+						<span class="subtle">Ancestors</span>
+						<span>AnimatedWidgetBase > StatefulComponent > Widget</span>
+					</div>
+				</p>
+				<p class="lead">Animated version of [Positioned] which automatically transitions the child's position over a given duration whenever the given positon changes.</p>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new AnimatedPositioned(
+  child: new Text('Lorem Ipsum')
+)</code></pre>
+				<div hidden id="AnimatedPositioned-ui">{"AnimatedPositioned":[{"child":{"Text":["Lorem Ipsum"]}}]}</div>
+				<div class="property">
+					<span class="strong">key</span>
+					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">child</span>
+					<span class="subtle">Widget</span>
+				</div>
+				<div class="property">
+					<span class="strong">left</span>
+					<span class="subtle">double</span>
+					<span>— The offset of the child's left edge from the left of the stack.</span>
+				</div>
+				<div class="property">
+					<span class="strong">top</span>
+					<span class="subtle">double</span>
+					<span>— The offset of the child's top edge from the top of the stack.</span>
+				</div>
+				<div class="property">
+					<span class="strong">right</span>
+					<span class="subtle">double</span>
+					<span>— The offset of the child's right edge from the right of the stack.</span>
+				</div>
+				<div class="property">
+					<span class="strong">bottom</span>
+					<span class="subtle">double</span>
+					<span>— The offset of the child's bottom edge from the bottom of the stack.</span>
+				</div>
+				<div class="property">
+					<span class="strong">width</span>
+					<span class="subtle">double</span>
+					<span>— The child's width.</span>
+				</div>
+				<div class="property">
+					<span class="strong">height</span>
+					<span class="subtle">double</span>
+					<span>— The child's height.</span>
+				</div>
+				<div class="property">
+					<span class="strong">curve</span>
+					<span class="subtle">Curve</span>
+				</div>
+				<div class="property">
+					<span class="strong">duration</span>
+					<span class="subtle">Duration</span>
+				</div>
+			</div>
+			<div hidden id="AnimatedWidgetBase" class="markdown-body">
+				<h1 class="page-title">AnimatedWidgetBase <span class=modifier>abstract</span></h1>
+				<p>
+					<div>
+						<span class="subtle">Ancestors</span>
+						<span>StatefulComponent > Widget</span>
+					</div>
+					<div>
+						<span class="subtle">Children</span>
+						<span>AnimatedContainer, AnimatedPositioned</span>
+					</div>
+				</p>
+				<p class="lead">An abstract widget for building components that gradually change their values over a period of time.</p>
+				<div class="property">
+					<span class="strong">key</span>
+					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">curve</span>
+					<span class="subtle">Curve</span>
+					<span>— The curve to apply when animating the parameters of this container.</span>
+				</div>
+				<div class="property">
+					<span class="strong">duration</span>
+					<span class="subtle">Duration</span>
+					<span>— The duration over which to animate the parameters of this container.</span>
 				</div>
 			</div>
 			<div hidden id="AspectRatio" class="markdown-body">
@@ -2166,7 +2254,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">onScroll</span>
@@ -2182,20 +2270,19 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Uses the block layout algorithm for its children.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new BlockBody(null)</code></pre>
-				<div hidden id="BlockBody-ui">{"BlockBody":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new BlockBody()</code></pre>
+				<div hidden id="BlockBody-ui">{"BlockBody":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
 				</div>
 				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
+				</div>
+				<div class="property">
 					<span class="strong">direction</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 					<span>— The direction to use as the main axis.</span>
 				</div>
 			</div>
@@ -2399,16 +2486,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Lays out child elements in a column.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Column(null)</code></pre>
-				<div hidden id="Column-ui">{"Column":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Column()</code></pre>
+				<div hidden id="Column-ui">{"Column":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">justifyContent</span>
@@ -2475,7 +2561,6 @@ a.menu-item {
 				<div class="property">
 					<span class="strong">constraints</span>
 					<span class="subtle">BoxConstraints</span>
-					<span>— Additional constraints to apply to the child.</span>
 				</div>
 				<div class="property">
 					<span class="strong">decoration</span>
@@ -2505,12 +2590,10 @@ a.menu-item {
 				<div class="property">
 					<span class="strong">width</span>
 					<span class="subtle">double</span>
-					<span>— If non-null, requires the decoration to have this width.</span>
 				</div>
 				<div class="property">
 					<span class="strong">height</span>
 					<span class="subtle">double</span>
-					<span>— If non-null, requires the decoration to have this height.</span>
 				</div>
 			</div>
 			<div hidden id="CustomGrid" class="markdown-body">
@@ -2522,16 +2605,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Uses the grid layout algorithm for its children.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new CustomGrid(null)</code></pre>
-				<div hidden id="CustomGrid-ui">{"CustomGrid":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new CustomGrid()</code></pre>
+				<div hidden id="CustomGrid-ui">{"CustomGrid":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">delegate</span>
@@ -2548,16 +2630,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Defers the layout of multiple children to a delegate.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new CustomMultiChildLayout(null)</code></pre>
-				<div hidden id="CustomMultiChildLayout-ui">{"CustomMultiChildLayout":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new CustomMultiChildLayout()</code></pre>
+				<div hidden id="CustomMultiChildLayout-ui">{"CustomMultiChildLayout":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">delegate</span>
@@ -2931,16 +3012,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Uses a grid layout with a fixed column count.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new FixedColumnCountGrid(null)</code></pre>
-				<div hidden id="FixedColumnCountGrid-ui">{"FixedColumnCountGrid":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new FixedColumnCountGrid()</code></pre>
+				<div hidden id="FixedColumnCountGrid-ui">{"FixedColumnCountGrid":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">columnCount</span>
@@ -2971,16 +3051,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Uses the flex layout algorithm for its children.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Flex(null)</code></pre>
-				<div hidden id="Flex-ui">{"Flex":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Flex()</code></pre>
+				<div hidden id="Flex-ui">{"Flex":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">direction</span>
@@ -3357,16 +3436,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">A [Stack] that shows a single child at once.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new IndexedStack(null)</code></pre>
-				<div hidden id="IndexedStack-ui">{"IndexedStack":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new IndexedStack()</code></pre>
+				<div hidden id="IndexedStack-ui">{"IndexedStack":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">alignment</span>
@@ -3463,7 +3541,7 @@ a.menu-item {
 					</div>
 					<div>
 						<span class="subtle">Children</span>
-						<span>ErrorWidget, RawImage, RawText, StatisticsOverlay, WidgetToRenderBoxAdapter</span>
+						<span>ErrorWidget, PerformanceOverlay, RawImage, RawText, WidgetToRenderBoxAdapter</span>
 					</div>
 				</p>
 				<p class="lead">A superclass for RenderObjectWidgets that configure RenderObject subclasses that have no children.</p>
@@ -3496,7 +3574,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">itemExtent</span>
@@ -3607,16 +3685,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Uses a grid layout with a max tile width.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new MaxTileWidthGrid(null)</code></pre>
-				<div hidden id="MaxTileWidthGrid-ui">{"MaxTileWidthGrid":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new MaxTileWidthGrid()</code></pre>
+				<div hidden id="MaxTileWidthGrid-ui">{"MaxTileWidthGrid":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">maxTileWidth</span>
@@ -3722,7 +3799,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">direction</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">builder</span>
@@ -4107,7 +4184,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">itemsWrap</span>
@@ -4146,7 +4223,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">onScrollStart</span>
@@ -4197,6 +4274,31 @@ a.menu-item {
 					<span class="subtle">Iterable</span>
 				</div>
 			</div>
+			<div hidden id="PerformanceOverlay" class="markdown-body">
+				<h1 class="page-title">PerformanceOverlay</h1>
+				<p>
+					<div>
+						<span class="subtle">Ancestors</span>
+						<span>LeafRenderObjectWidget > RenderObjectWidget > Widget</span>
+					</div>
+				</p>
+				<p class="lead">Displays performance statistics.</p>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new PerformanceOverlay()</code></pre>
+				<div hidden id="PerformanceOverlay-ui">{"PerformanceOverlay":[]}</div>
+				<div class="property">
+					<span class="strong">optionsMask</span>
+					<span class="subtle">int</span>
+				</div>
+				<div class="property">
+					<span class="strong">rasterizerThreshold</span>
+					<span class="subtle">int</span>
+					<span>— The rasterizer threshold is an integer specifying the number of frame intervals that the rasterizer must miss before it decides that the frame is suitable for capturing an SkPicture trace for further analysis.</span>
+				</div>
+				<div class="property">
+					<span class="strong">key</span>
+					<span class="subtle">Key</span>
+				</div>
+			</div>
 			<div hidden id="Placeholder" class="markdown-body">
 				<h1 class="page-title">Placeholder</h1>
 				<p>
@@ -4221,7 +4323,7 @@ a.menu-item {
 						<span>TransitionWithChild > TransitionComponent > StatefulComponent > Widget</span>
 					</div>
 				</p>
-				<p class="lead">Animated version of [Positioned]. Only works if it's the child of a [Stack].</p>
+				<p class="lead">Animated version of [Positioned] which takes a specific [AnimatedRelativeRectValue] and a [PerformanceView] to transition the child's position from a start position to and end position over the lifetime of the performance.</p>
 				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new PositionedTransition(
   child: new Text('Lorem Ipsum')
 )</code></pre>
@@ -4478,16 +4580,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Lays out child elements in a row.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Row(null)</code></pre>
-				<div hidden id="Row-ui">{"Row":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Row()</code></pre>
+				<div hidden id="Row-ui">{"Row":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">justifyContent</span>
@@ -4525,7 +4626,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">onScrollStart</span>
@@ -4608,7 +4709,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">onScroll</span>
@@ -4714,7 +4815,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">onScroll</span>
@@ -4744,7 +4845,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 				</div>
 				<div class="property">
 					<span class="strong">onScroll</span>
@@ -4996,16 +5097,15 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">Uses the stack layout algorithm for its children.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Stack(null)</code></pre>
-				<div hidden id="Stack-ui">{"Stack":[null]}</div>
-				<div class="property">
-					<span class="strong">children</span>
-					<span class="subtle">List</span>
-					<span class="modifier">(required)</span>
-				</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new Stack()</code></pre>
+				<div hidden id="Stack-ui">{"Stack":[]}</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">children</span>
+					<span class="subtle">List</span>
 				</div>
 				<div class="property">
 					<span class="strong">alignment</span>
@@ -5062,7 +5162,7 @@ a.menu-item {
 					</div>
 					<div>
 						<span class="subtle">Children</span>
-						<span>AnimatedContainer, BottomSheet, DatePicker, Dismissable, DragTarget, DraggableBase, DrawerController, DropDownButton, EditableText, EnterExitTransition, FloatingActionButton, Focus, GestureDetector, Hero, InkResponse, Material, MaterialApp, MaterialButton, MaterialList, Mimicable, Navigator, Overlay, Placeholder, ProgressIndicator, RawImageResource, Scaffold, Scrollable, SmoothlyResizingOverflowBox, StatefulBuilder, StatusTransitionComponent, TabBarSelection, TimePicker, TransitionComponent, UniqueComponent</span>
+						<span>AnimatedWidgetBase, BottomSheet, DatePicker, Dismissable, DragTarget, DraggableBase, DrawerController, DropDownButton, EditableText, EnterExitTransition, FloatingActionButton, Focus, GestureDetector, Hero, InkResponse, Material, MaterialApp, MaterialButton, MaterialList, Mimicable, Navigator, Overlay, Placeholder, ProgressIndicator, RawImageResource, Scaffold, Scrollable, SmoothlyResizingOverflowBox, StatefulBuilder, StatusTransitionComponent, TabBarSelection, TimePicker, TransitionComponent, UniqueComponent</span>
 					</div>
 				</p>
 				<p class="lead">StatefulComponents provide the configuration for [StatefulComponentElement]s, which wrap [State]s, which hold mutable state and can dynamically and spontaneously ask to be rebuilt.</p>
@@ -5084,31 +5184,6 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">StatelessComponents describe a way to compose other Widgets to form reusable parts, which doesn't depend on anything other than the configuration information in the object itself. (For compositions that can change dynamically, e.g. due to having an internal clock-driven state, or depending on some system state, use [StatefulComponent].)</p>
-				<div class="property">
-					<span class="strong">key</span>
-					<span class="subtle">Key</span>
-				</div>
-			</div>
-			<div hidden id="StatisticsOverlay" class="markdown-body">
-				<h1 class="page-title">StatisticsOverlay</h1>
-				<p>
-					<div>
-						<span class="subtle">Ancestors</span>
-						<span>LeafRenderObjectWidget > RenderObjectWidget > Widget</span>
-					</div>
-				</p>
-				<p class="lead">Displays performance statistics.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new StatisticsOverlay()</code></pre>
-				<div hidden id="StatisticsOverlay-ui">{"StatisticsOverlay":[]}</div>
-				<div class="property">
-					<span class="strong">optionsMask</span>
-					<span class="subtle">int</span>
-				</div>
-				<div class="property">
-					<span class="strong">rasterizerThreshold</span>
-					<span class="subtle">int</span>
-					<span>— The rasterizer threshold is an integer specifying the number of frame intervals that the rasterizer must miss before it decides that the frame is suitable for capturing an SkPicture trace for further analysis.</span>
-				</div>
 				<div class="property">
 					<span class="strong">key</span>
 					<span class="subtle">Key</span>
@@ -5329,7 +5404,7 @@ a.menu-item {
 				</div>
 				<div class="property">
 					<span class="strong">scrollDirection</span>
-					<span class="subtle">ScrollDirection</span>
+					<span class="subtle">Axis</span>
 					<span>— The direction in which the child is permitted to be larger than the viewport</span>
 				</div>
 				<div class="property">
