@@ -190,7 +190,10 @@ a.menu-item {
 	<div flex layout no-x-scroll class="columns docs-layout">
 		<div class="column one-fourth">
 			<nav class="menu docs-menu">
-				<span class="menu-heading">Widgets</span>
+				<span class="menu-heading menu-item">
+					<span>Widgets</span>
+					<span class="counter">115</span>
+				</span>
 				<a ref-id="Align" class="menu-item">Align</a>
 				<a ref-id="AlignTransition" class="menu-item">AlignTransition</a>
 				<a ref-id="AnimatedContainer" class="menu-item">AnimatedContainer</a>
@@ -275,6 +278,7 @@ a.menu-item {
 				<a ref-id="RepaintBoundary" class="menu-item">RepaintBoundary</a>
 				<a ref-id="RotationTransition" class="menu-item">RotationTransition</a>
 				<a ref-id="Row" class="menu-item">Row</a>
+				<a ref-id="ScaleTransition" class="menu-item">ScaleTransition</a>
 				<a ref-id="Scrollable" class="menu-item">Scrollable</a>
 				<a ref-id="ScrollableGrid" class="menu-item">ScrollableGrid</a>
 				<a ref-id="ScrollableList" class="menu-item">ScrollableList</a>
@@ -307,7 +311,10 @@ a.menu-item {
 				<a ref-id="WidgetToRenderBoxAdapter" class="menu-item">WidgetToRenderBoxAdapter</a>
 			</nav>
 			<nav class="menu docs-menu">
-				<span class="menu-heading">Material</span>
+				<span class="menu-heading menu-item">
+					<span>Material</span>
+					<span class="counter">46</span>
+				</span>
 				<a ref-id="BottomSheet" class="menu-item">BottomSheet</a>
 				<a ref-id="Card" class="menu-item">Card</a>
 				<a ref-id="Checkbox" class="menu-item">Checkbox</a>
@@ -4603,6 +4610,39 @@ a.menu-item {
 					<span class="subtle">dynamic</span>
 				</div>
 			</div>
+			<div hidden id="ScaleTransition" class="markdown-body">
+				<h1 class="page-title">ScaleTransition</h1>
+				<p>
+					<div>
+						<span class="subtle">Ancestors</span>
+						<span>TransitionWithChild > TransitionComponent > StatefulComponent > Widget</span>
+					</div>
+				</p>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new ScaleTransition(
+  child: new Text('Lorem Ipsum')
+)</code></pre>
+				<div hidden id="ScaleTransition-ui">{"ScaleTransition":[{"child":{"Text":["Lorem Ipsum"]}}]}</div>
+				<div class="property">
+					<span class="strong">key</span>
+					<span class="subtle">Key</span>
+				</div>
+				<div class="property">
+					<span class="strong">scale</span>
+					<span class="subtle">AnimatedValue</span>
+				</div>
+				<div class="property">
+					<span class="strong">alignment</span>
+					<span class="subtle">FractionalOffset</span>
+				</div>
+				<div class="property">
+					<span class="strong">performance</span>
+					<span class="subtle">PerformanceView</span>
+				</div>
+				<div class="property">
+					<span class="strong">child</span>
+					<span class="subtle">Widget</span>
+				</div>
+			</div>
 			<div hidden id="Scrollable" class="markdown-body">
 				<h1 class="page-title">Scrollable <span class=modifier>abstract</span></h1>
 				<p>
@@ -5355,7 +5395,7 @@ a.menu-item {
 					</div>
 					<div>
 						<span class="subtle">Children</span>
-						<span>AlignTransition, ColorTransition, FadeTransition, PositionedTransition, RotationTransition, SlideTransition, SquashTransition</span>
+						<span>AlignTransition, ColorTransition, FadeTransition, PositionedTransition, RotationTransition, ScaleTransition, SlideTransition, SquashTransition</span>
 					</div>
 				</p>
 				<div class="property">
@@ -5453,12 +5493,16 @@ a.menu-item {
 					</div>
 				</p>
 				<p class="lead">An adapter for placing a specific [RenderBox] in the widget tree.</p>
-				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new WidgetToRenderBoxAdapter(null)</code></pre>
-				<div hidden id="WidgetToRenderBoxAdapter-ui">{"WidgetToRenderBoxAdapter":[null]}</div>
+				<pre class="prettyprint"><code data-lang="dart" class="language-dart">new WidgetToRenderBoxAdapter()</code></pre>
+				<div hidden id="WidgetToRenderBoxAdapter-ui">{"WidgetToRenderBoxAdapter":[]}</div>
 				<div class="property">
 					<span class="strong">renderBox</span>
 					<span class="subtle">RenderBox</span>
-					<span class="modifier">(required)</span>
+				</div>
+				<div class="property">
+					<span class="strong">onBuild</span>
+					<span class="subtle">VoidCallback</span>
+					<span>— Called when it is safe to update the render box and its descendants. If you update the RenderObject subtree under this widget outside of invocations of this callback, features like hit-testing will fail as the tree will be dirty.</span>
 				</div>
 			</div>
 		</div>

@@ -133,7 +133,10 @@ class Generator extends HtmlGen {
     if (pages.isEmpty) return;
 
     startTag("nav", c: "menu docs-menu");
-    span(c: "menu-heading", text: category);
+    startTag('span', c: "menu-heading menu-item");
+    span(text: category);
+    span(text: pages.length.toString(), c: 'counter');
+    endTag();
 
     for (SubPage page in pages) {
       tag(
