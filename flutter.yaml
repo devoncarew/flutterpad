@@ -1,4 +1,5 @@
 name: flutterpad
 material-design-icons:
+  - name: action/autorenew
   - name: content/add
   - name: navigation/more_vert
